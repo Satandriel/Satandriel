@@ -1,0 +1,222 @@
+from tkinter import *
+from pytube import YouTube
+from customtkinter import *
+import requests
+import base64
+import subprocess
+import pyautogui
+from PIL import Image
+
+
+def principal():
+    global janela_geral
+    janela_geral = Tk()
+    janela_geral.title("berry")
+    janela_geral.geometry("610x200")
+    botao1 = Button(janela_geral, text="atalhos", command=transição_principal_atalhos)
+    botao1.place(x=50, y=100)
+    botao2 = Button(janela_geral, text="gerenciador", command=transição_principal_gerenciador)
+    botao2.place(x=150, y=100)
+    botao3 = Button(janela_geral, text="upload", command=transição_principal_upload)
+    botao3.place(x=280, y=100)
+    botao4 = Button(janela_geral, text="tradutor", command=transição_principal_tradutor)
+    botao4.place(x=390, y=100)
+    botao5 = Button(janela_geral, text="downloads", command=transição_principal_downloads)
+    botao5.place(x=500, y=100)
+
+    janela_geral.mainloop()
+
+
+def transição_principal_atalhos():
+    janela_geral.destroy()
+    atalhos()
+
+
+def transição_atalhos_principal():
+    janela_atalho.destroy()
+    principal()
+
+
+def transição_principal_downloads():
+    janela_geral.destroy()
+    downloads()
+
+
+def transição_downloads_principal():
+    janela_download.destroy()
+    principal()
+
+
+def transição_principal_gerenciador():
+    janela_geral.destroy()
+    gerenciador()
+
+
+def transição_gerenciador_principal():
+    janela_gerenciador.destroy()
+    principal()
+
+
+def transição_principal_upload():
+    janela_geral.destroy()
+    upload()
+
+
+def transição_upload_principal():
+    janela_upload.destroy()
+    principal()
+
+
+def transição_principal_tradutor():
+    janela_geral.destroy()
+    tradutor()
+
+
+def transição_tradutor_principal():
+    janela_tradutor.destroy()
+    principal()
+
+
+def atalhos():
+    global janela_atalho
+    janela_atalho = Tk()
+    janela_atalho.title("atalhos")
+    janela_atalho.geometry("600x600")
+    botao_saida = Button(janela_atalho, text="sair", command=transição_atalhos_principal)
+    botao_saida.place(x=100, y=100)
+    botao_atalho1 = Button(janela_atalho,text="vergonha alheia", command=atalhos_action)
+    botao_atalho1.place(x=200,y=100)
+    botao_atalho2 = Button(janela_atalho, text="vergonha alheia 2, o retorno", command=atalhos_action2)
+    botao_atalho2.place(x=200, y=200)
+    janela_atalho.mainloop()
+
+def atalhos_action():
+
+    subprocess.Popen(["C:/Program Files/Google/Chrome/Application/chrome.exe", "https://www.youtube.com/watch?v=rksAhzJCTn0&t=1707s"])
+
+def atalhos_action2():
+
+    subprocess.Popen(["C:/Program Files/Google/Chrome/Application/chrome.exe", "https://www.youtube.com/watch?v=2Fhd5D9LGfA&t=897s"])
+
+def downloads():
+    global entry1
+    global janela_download
+    janela_download = Tk()
+    janela_download.title("downloads")
+    janela_download.geometry("600x600")
+    botao_saida = Button(janela_download, text="sair", command=transição_downloads_principal)
+    botao_saida.place(x=100, y=100)
+    botao_download = Button(janela_download, text="baixar video", command=youtube_download)
+    botao_download.place(x=100, y=200)
+    entry1 = Entry(janela_download)
+    entry1.place(x=200, y=200)
+
+    janela_download.mainloop()
+
+
+def youtube_download():
+    link = entry1.get()
+    yt = YouTube(f'{link}')
+    all_streams = yt.streams.all()
+    mp4_720p = yt.streams.get_by_itag(22)
+    mp4_720p.download()
+
+
+def gerenciador():
+    global janela_gerenciador
+    janela_gerenciador = Tk()
+    janela_gerenciador.title("gerenciador")
+    janela_gerenciador.geometry("600x600")
+    botao_saida = Button(janela_gerenciador, text="sair", command=transição_gerenciador_principal)
+    botao_saida.place(x=100, y=100)
+
+    janela_gerenciador.mainloop()
+
+
+def upload():
+    # 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
+
+    global janela_upload
+    janela_upload = Tk()
+    janela_upload.title("upload")
+    janela_upload.geometry("600x600")
+    botao_saida = Button(janela_upload, text="sair", command=transição_upload_principal)
+    botao_saida.place(x=100, y=100)
+    botao_upload = Button(janela_upload,text="upload", command= upload_action)
+    botao_upload.place(x=200,y=100)
+
+    janela_upload.mainloop()
+
+def upload_action():
+    import requests
+
+    username = 'Satandriel'
+    token = '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'
+
+    # Define o nome do arquivo e o caminho para o arquivo local
+    filename = 'message3.txt'
+    path = 'C:/Users/Alunos/Downloads/'
+
+    # Define a URL para o repositório no GitHub e o caminho para o arquivo remoto
+    url = 'https://api.github.com/repos/Satandriel/Satandriel/contents/arquivos/{}'.format(filename)
+
+    # Abre o arquivo local para leitura binária
+    with open(path + filename, 'rb') as file:
+        content = file.read()
+
+    # Codifica o conteúdo do arquivo em Base64
+    content_b64 = base64.b64encode(content)
+
+    # Define o payload com as informações necessárias para a API do GitHub
+    payload = {
+        "message": "Adicionando arquivo de exemplo",
+        "content": content_b64.decode('utf-8')
+    }
+
+    # Define os headers com as informações de autenticação
+    headers = {
+        'Authorization': 'token ' + token
+    }
+
+    # Envia a requisição POST para a API do GitHub
+    response = requests.put(url=url, json=payload, headers=headers)
+
+    # Exibe a resposta
+    print(response.text)
+
+
+def tradutor():
+    global traducao
+    global entry_tradutor1
+    global janela_tradutor
+    janela_tradutor = Tk()
+    janela_tradutor.title("tradutor")
+    janela_tradutor.geometry("600x600")
+    botao_saida = Button(janela_tradutor, text="sair", command=transição_tradutor_principal)
+    botao_saida.place(x=100, y=100)
+    entry_tradutor1 = Entry(janela_tradutor)
+    entry_tradutor1.place(x=100, y=200)
+    botao1 = Button(janela_tradutor, text="traduzir", command=tradução)
+    botao1.place(x=50, y=200)
+    traducao = Entry(janela_tradutor, text="", width=50)
+    traducao.place(x=100, y=250)
+
+    janela_tradutor.mainloop()
+
+
+def tradução():
+    # 37dceabe92458d9c9e9d
+
+    url = 'https://api.mymemory.translated.net/get'
+    key = '37dceabe92458d9c9e9d'
+    texto_origem = f'{entry_tradutor1.get()}'
+    idioma_origem = 'en'
+    idioma_destino = 'pt'
+    params = {'q': texto_origem, 'langpair': idioma_origem + '|' + idioma_destino, 'key': key}
+    response = requests.get(url, params=params)
+    texto_destino = response.json()['responseData']['translatedText']
+    traducao.delete("0", "end")
+    traducao.insert(0, f'{texto_destino}')
+
+
+principal()
