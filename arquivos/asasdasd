@@ -1,0 +1,321 @@
+from tkinter import *
+from tkinter import ttk
+from tkinter import Tk
+from tkinter.filedialog import askopenfilename
+from pytube import YouTube
+from customtkinter import *
+import requests
+import base64
+import subprocess
+import pyautogui
+from PIL import Image
+
+
+def principal():
+    global janela_geral
+    janela_geral = Tk()
+    janela_geral.title("berry")
+    janela_geral.geometry("610x200")
+    botao1 = Button(janela_geral, text="atalhos", command=transição_principal_atalhos)
+    botao1.place(x=50, y=100)
+    botao2 = Button(janela_geral, text="gerenciador", command=transição_principal_gerenciador)
+    botao2.place(x=150, y=100)
+    botao3 = Button(janela_geral, text="upload", command=transição_principal_upload)
+    botao3.place(x=280, y=100)
+    botao4 = Button(janela_geral, text="tradutor", command=transição_principal_tradutor)
+    botao4.place(x=390, y=100)
+    botao5 = Button(janela_geral, text="downloads", command=transição_principal_downloads)
+    botao5.place(x=500, y=100)
+
+    janela_geral.mainloop()
+
+
+def transição_principal_atalhos():
+    janela_geral.destroy()
+    atalhos()
+
+
+def transição_atalhos_principal():
+    janela_atalho.destroy()
+    principal()
+
+
+def transição_principal_downloads():
+    janela_geral.destroy()
+    downloads()
+
+
+def transição_downloads_principal():
+    janela_download.destroy()
+    principal()
+
+
+def transição_principal_gerenciador():
+    janela_geral.destroy()
+    gerenciador()
+
+
+def transição_gerenciador_principal():
+    janela_gerenciador.destroy()
+    principal()
+
+
+def transição_principal_upload():
+    janela_geral.destroy()
+    upload()
+
+
+def transição_upload_principal():
+    janela_upload.destroy()
+    principal()
+
+
+def transição_principal_tradutor():
+    janela_geral.destroy()
+    tradutor()
+
+
+def transição_tradutor_principal():
+    janela_tradutor.destroy()
+    principal()
+
+def definir_atalhos():
+    janela_atalho2 = Tk()
+    janela_atalho2.title("definir atalhos")
+    janela_atalho2.geometry("600x600")
+
+    botao1 = Button(janela_atalho2,text="definir atalho 1", command= definir_atalho1)
+    botao1.place(x=100,y=50)
+    botao2 = Button(janela_atalho2, text="definir atalho 2", command= definir_atalho2)
+    botao2.place(x=100, y=150)
+    botao3 = Button(janela_atalho2, text="definir atalho 3", command= definir_atalho3)
+    botao3.place(x=100, y=250)
+    botao4 = Button(janela_atalho2, text="definir atalho 4", command= definir_atalho4)
+    botao4.place(x=300, y=50)
+    botao5 = Button(janela_atalho2, text="definir atalho 5", command= definir_atalho5)
+    botao5.place(x=300, y=150)
+    botao6 = Button(janela_atalho2, text="definir atalho 6", command= definir_atalho6)
+    botao6.place(x=300, y=250)
+
+    janela_atalho2.mainloop()
+
+
+def definir_atalho1():
+    atalho1 = askopenfilename()
+
+def definir_atalho2():
+    atalho2 = askopenfilename()
+
+def definir_atalho3():
+    atalho3 = askopenfilename()
+
+def definir_atalho4():
+    atalho4 = askopenfilename()
+
+def definir_atalho5():
+    atalho5 = askopenfilename()
+
+def definir_atalho6():
+    atalho6 = askopenfilename()
+
+def atalhos():
+    global janela_atalho
+    janela_atalho = Tk()
+    janela_atalho.title("atalhos")
+    janela_atalho.geometry("600x600")
+    botao_saida = Button(janela_atalho, text="sair", command=transição_atalhos_principal)
+    botao_saida.place(x=10, y=100)
+    label1 = Button(janela_atalho, text= "definir atalhos", command= definir_atalhos)
+    label1.place(x=10,y=10)
+    botao_atalho1 = Button(janela_atalho,text="vergonha alheia", command=atalhos_action)
+    botao_atalho1.place(x=100,y=100)
+    botao_atalho2 = Button(janela_atalho, text="vergonha alheia 2, o retorno", command=atalhos_action2)
+    botao_atalho2.place(x=100, y=200)
+    botao_atalho3 = Button(janela_atalho, text="vergonha alheia 2, o retorno", command=atalhos_action2)
+    botao_atalho3.place(x=100, y=200)
+    botao_atalho4 = Button(janela_atalho, text="vergonha alheia 2, o retorno", command=atalhos_action2)
+    botao_atalho4.place(x=100, y=300)
+    botao_atalho5 = Button(janela_atalho, text="vergonha alheia 2, o retorno", command=atalhos_action2)
+    botao_atalho5.place(x=350, y=100)
+    botao_atalho6 = Button(janela_atalho, text="vergonha alheia 2, o retorno", command=atalhos_action2)
+    botao_atalho6.place(x=350, y=200)
+    janela_atalho.mainloop()
+
+
+def atalhos_action():
+
+    subprocess.Popen(["C:/Program Files/Google/Chrome/Application/chrome.exe", "https://www.youtube.com/watch?v=rksAhzJCTn0&t=1707s"])
+
+def atalhos_action2():
+
+    subprocess.Popen(["C:/Program Files/Google/Chrome/Application/chrome.exe", "https://www.youtube.com/watch?v=2Fhd5D9LGfA&t=897s"])
+
+def downloads():
+    global entry1
+    global janela_download
+    janela_download = Tk()
+    janela_download.title("downloads")
+    janela_download.geometry("600x600")
+    botao_saida = Button(janela_download, text="sair", command=transição_downloads_principal)
+    botao_saida.place(x=100, y=100)
+    botao_download = Button(janela_download, text="baixar video", command=youtube_download)
+    botao_download.place(x=100, y=200)
+    entry1 = Entry(janela_download)
+    entry1.place(x=200, y=200)
+
+    janela_download.mainloop()
+
+
+def youtube_download():
+    link = entry1.get()
+    yt = YouTube(f'{link}')
+    all_streams = yt.streams.all()
+    mp4_144p = yt.streams.get_by_itag(22)
+    mp4_144p.download()
+
+
+def gerenciador():
+    global janela_gerenciador
+    janela_gerenciador = Tk()
+    janela_gerenciador.title("gerenciador")
+    janela_gerenciador.geometry("600x600")
+    botao_saida = Button(janela_gerenciador, text="sair", command=transição_gerenciador_principal)
+    botao_saida.place(x=100, y=100)
+
+    janela_gerenciador.mainloop()
+
+
+def upload():
+    # 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
+
+    global janela_upload
+    global entry_upload1
+    global entry_upload2
+    global entry_upload3
+    global entry_upload4
+
+    janela_upload = Tk()
+    janela_upload.title("upload")
+    janela_upload.geometry("600x600")
+    botao_saida = Button(janela_upload, text="sair", command=transição_upload_principal)
+    botao_saida.place(x=10, y=10)
+    botao_upload = Button(janela_upload,text="upload", command= upload_action)
+    botao_upload.place(x=250,y=420)
+    label_upload2 = Button(janela_upload, text= "Selecionar Arquivo", command= upload_select)
+    label_upload2.place(x=100, y=190)
+    label_upload4 = Label(janela_upload, text="Nome para o arquivo:")
+    label_upload4.place(x=100, y=370)
+    entry_upload4 = Entry(janela_upload)
+    entry_upload4.place(x=260, y=370)
+
+    janela_upload.mainloop()
+
+def upload_select():
+    global arquivo
+    arquivo = askopenfilename()
+
+    # C:/Users/Alunos/Desktop/aaaaaaaaaaaaaaaa2.txt
+
+def upload_action():
+
+    token = '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'
+
+    # Define o nome do arquivo e o caminho para o arquivo local
+    path = arquivo
+    filename = entry_upload4.get()
+
+    # Define a URL para o repositório no GitHub e o caminho para o arquivo remoto
+    url = 'https://api.github.com/repos/Satandriel/Satandriel/contents/arquivos/{}'.format(filename)
+
+    # Abre o arquivo local para leitura binária
+    with open(path, 'rb') as file:
+        content = file.read()
+
+    # Codifica o conteúdo do arquivo em Base64
+    content_b64 = base64.b64encode(content)
+
+    # Define o payload com as informações necessárias para a API do GitHub
+    payload = {
+        "message": "Adicionando arquivo de exemplo",
+        "content": content_b64.decode('utf-8')
+    }
+
+    # Define os headers com as informações de autenticação
+    headers = {
+        'Authorization': 'token ' + token
+    }
+
+    # Envia a requisição POST para a API do GitHub
+    response = requests.put(url=url, json=payload, headers=headers)
+
+    # Exibe a resposta
+    print(response.text)
+
+
+def tradutor():
+    global var2
+    global escolha
+    global traducao
+    global entry_tradutor1
+    global janela_tradutor
+    janela_tradutor = Tk()
+    janela_tradutor.title("tradutor")
+    janela_tradutor.geometry("700x600")
+    botao_saida = Button(janela_tradutor, text="sair", command=transição_tradutor_principal)
+    botao_saida.place(x=100, y=100)
+    entry_tradutor1 = Entry(janela_tradutor, width=50)
+    entry_tradutor1.place(x=100, y=200)
+    botao1 = Button(janela_tradutor, text="traduzir", command=tradução)
+    botao1.place(x=290, y=300)
+    traducao = Entry(janela_tradutor, text="", width=50)
+    traducao.place(x=100, y=250)
+
+    escolha = StringVar()  # Guarda o valor escolhido
+    var2 = StringVar()
+
+    # radioButtons:
+    escolha1 = ttk.Radiobutton(janela_tradutor, text='Inglês', value='en', variable=escolha)
+    escolha1.place(x=200, y=50)
+    escolha2 = ttk.Radiobutton(janela_tradutor, text='Espanhol', value='es', variable=escolha)
+    escolha2.place(x=200, y=80)
+    escolha3 = ttk.Radiobutton(janela_tradutor, text='Alemão', value='de', variable=escolha)
+    escolha3.place(x=200, y=110)
+    c2 = Checkbutton(janela_tradutor, text='Inverter Tradução', variable=var2, onvalue="on", offvalue="off")
+    c2.place(x=300, y=80)
+
+    janela_tradutor.mainloop()
+
+
+def tradução():
+    inverter = var2.get()
+    linguagem = escolha.get()
+    print(linguagem)
+    # 37dceabe92458d9c9e9d
+    url = 'https://api.mymemory.translated.net/get'
+    key = '37dceabe92458d9c9e9d'
+    texto_origem = f'{entry_tradutor1.get()}'
+    if inverter == "off":
+        if linguagem == "en":
+            idioma_origem = 'en'
+        elif linguagem == "es":
+            idioma_origem = 'es'
+        elif linguagem == "de":
+            idioma_origem = 'de'
+        idioma_destino = 'pt'
+    elif inverter == "on":
+        if linguagem == "en":
+            idioma_destino = 'en'
+        elif linguagem == "es":
+            idioma_destino = 'es'
+        elif linguagem == "de":
+            idioma_destino = 'de'
+        idioma_origem = 'pt'
+
+    params = {'q': texto_origem, 'langpair': idioma_origem + '|' + idioma_destino, 'key': key}
+    response = requests.get(url, params=params)
+    texto_destino = response.json()['responseData']['translatedText']
+    traducao.delete("0", "end")
+    traducao.insert(0, f'{texto_destino}')
+
+
+principal()
